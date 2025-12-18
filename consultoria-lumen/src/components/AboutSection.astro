@@ -1,0 +1,66 @@
+---
+---
+
+<section id="sobre-mi" class="py-32 bg-secondary relative overflow-hidden">
+  <!-- Zodiac Wheel Background -->
+  <div class="absolute -right-20 top-1/2 -translate-y-1/2 w-[800px] h-[800px] opacity-5 pointer-events-none animate-spin-slow">
+    <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="0.2" class="text-white w-full h-full">
+      <circle cx="50" cy="50" r="48" />
+      <circle cx="50" cy="50" r="35" />
+      <path d="M50 2 L50 98 M2 50 L98 50 M16 16 L84 84 M16 84 L84 16" />
+      <!-- Add more zodiac symbols here ideally -->
+    </svg>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="flex flex-col md:flex-row items-center gap-20">
+      <!-- Image Placeholder -->
+      <div class="w-full md:w-5/12 relative group perspective-1000">
+        <div class="relative z-10 aspect-[3/4] bg-gray-900 grayscale group-hover:grayscale-0 transition-all duration-700 ease-out border border-white/10 overflow-hidden">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-60"></div>
+            <div class="flex items-center justify-center h-full text-gray-600 font-serif tracking-widest uppercase text-sm">
+                [Retrato]
+            </div>
+        </div>
+        <!-- Frame -->
+        <div class="absolute -top-4 -left-4 w-full h-full border border-accent/20 z-0 transition-transform duration-500 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+      </div>
+      
+      <!-- Content -->
+      <div class="w-full md:w-7/12">
+        <h2 class="text-4xl md:text-6xl font-serif text-white mb-10 tracking-tight">
+          Sobre <span class="text-accent italic">Luisa Planas</span>
+        </h2>
+        
+        <div class="space-y-8 text-lg text-gray-400 font-light leading-relaxed max-w-xl">
+          <p>
+            En un mundo ruidoso, mi labor es ayudarte a escuchar tu propia voz. 
+            A través de la <strong class="text-white font-normal">Astrología Evolutiva</strong> y el <strong class="text-white font-normal">Tarot</strong>, 
+            decodificamos el lenguaje simbólico de tu vida para revelar patrones, talentos y propósitos ocultos.
+          </p>
+          <p>
+            No ofrezco predicciones fatalistas, sino mapas de navegación. 
+            Mi enfoque combina la mística antigua con una sensibilidad contemporánea, 
+            creando un espacio seguro para la introspección y el crecimiento radical.
+          </p>
+        </div>
+        
+        <div class="mt-12 pt-8 border-t border-white/10">
+            <p class="font-serif text-2xl text-white/80 italic">
+                "As above, so below."
+            </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .animate-spin-slow {
+    animation: spin 60s linear infinite;
+  }
+  @keyframes spin {
+    from { transform: translateY(-50%) rotate(0deg); }
+    to { transform: translateY(-50%) rotate(360deg); }
+  }
+</style>

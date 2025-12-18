@@ -1,0 +1,85 @@
+---
+// CalendlyWidget.astro
+interface Props {
+  url?: string;
+  text?: string;
+}
+
+const { url = "https://calendly.com/luisaplanas", text = "Reservar Cita" } = Astro.props;
+---
+
+<button
+  data-calendly-url={url}
+  class="calendly-trigger w-full bg-white/5 hover:bg-accent text-white hover:text-background font-serif uppercase tracking-widest text-xs py-4 px-6 border border-white/10 hover:border-accent transition-all duration-300"
+>
+  {text}
+</button>
+
+<script>
+  let isCalendlyLoaded = false;
+  let isCalendlyLoading = false;
+
+  const loadCalendlyScript = () => {
+    return new Promise<void>((resolve, reject) => {
+      if (isCalendlyLoaded) return resolve();
+      if (isCalendlyLoading) {
+        const check = setInterval(() => {
+            if (isCalendlyLoaded) {
+                clearInterval(check);
+                resolve();
+            }
+        }, 100);
+        return;
+      }
+
+      isCalendlyLoading = true;
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = () => {
+        isCalendlyLoaded = true;
+        isCalendlyLoading = false;
+        resolve();
+      };
+      script.onerror = reject;
+      document.head.appendChild(script);
+
+      const link = document.createElement('link');
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      link.rel = 'stylesheet';
+      document.head.appendChild(link);
+    });
+  };
+
+  const initCalendlyButtons = () => {
+    const buttons = document.querySelectorAll('.calendly-trigger');
+    
+    buttons.forEach(btn => {
+      btn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const url = (btn as HTMLElement).dataset.calendlyUrl;
+        
+        if (!url) return;
+
+        const originalText = btn.textContent;
+        btn.textContent = "Conectando...";
+        
+        try {
+            await loadCalendlyScript();
+            // @ts-ignore
+            if (window.Calendly) {
+                // @ts-ignore
+                window.Calendly.initPopupWidget({ url });
+            }
+        } catch (err) {
+            console.error("Failed to load Calendly", err);
+        } finally {
+            btn.textContent = originalText;
+        }
+      });
+    });
+  };
+
+  initCalendlyButtons();
+  document.addEventListener('astro:page-load', initCalendlyButtons);
+</script>

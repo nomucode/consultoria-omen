@@ -1,0 +1,45 @@
+@import "tailwindcss";
+@plugin "tailwindcss-animate";
+
+@theme {
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Inter', sans-serif;
+
+  --color-background: #0F172A;
+  --color-primary: #4F46E5;
+  --color-accent: #F59E0B;
+  --color-text: #F8FAFC;
+  --color-secondary: #1E293B;
+}
+
+/* Custom Utilities for 3D Effects */
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+}
+
+body {
+  @apply bg-background text-text font-sans antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-serif;
+}
