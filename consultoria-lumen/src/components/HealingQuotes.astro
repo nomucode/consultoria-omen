@@ -1,0 +1,84 @@
+---
+import quotes from '../data/quotes.json';
+---
+
+<section id="frases-sanar" class="py-24 bg-background relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+    <div class="absolute top-10 left-10 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-10 right-10 w-96 h-96 bg-accent/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-5xl font-serif text-white mb-4">Frases para Sanar</h2>
+      <div class="w-24 h-1 bg-secondary mx-auto"></div>
+      <p class="mt-4 text-gray-400 max-w-2xl mx-auto italic">
+        Reflexiones para la meditación y el equilibrio emocional.
+      </p>
+    </div>
+
+    <div class="max-w-4xl mx-auto relative">
+      <!-- Quote Card -->
+      <div class="bg-white/5 backdrop-blur-sm border border-white/10 p-12 md:p-16 rounded-lg relative min-h-[300px] flex flex-col items-center justify-center text-center transition-all duration-500" id="quote-container">
+        
+        <!-- Decorative Quote Icon -->
+        <div class="absolute top-8 left-8 text-accent/20">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.0166 21L5.0166 18C5.0166 16.8954 5.91203 16 7.0166 16H10.0166C10.5689 16 11.0166 15.5523 11.0166 15V9C11.0166 8.44772 10.5689 8 10.0166 8H6.0166C5.46432 8 5.0166 8.44772 5.0166 9V11C5.0166 11.5523 4.56889 12 4.0166 12H3.0166V5H13.0166V15C13.0166 18.3137 10.3303 21 7.0166 21H5.0166Z" />
+          </svg>
+        </div>
+
+        <p class="text-xl md:text-3xl font-serif text-white leading-relaxed mb-8 relative z-10" id="quote-text">
+          {quotes[0].text}
+        </p>
+        
+        <div class="flex items-center gap-4 mt-auto">
+            <span class="text-accent text-sm tracking-widest uppercase" id="quote-counter">1 / {quotes.length}</span>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <div class="flex justify-center mt-8 gap-4">
+        <button id="prev-quote" class="p-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors group" aria-label="Anterior frase">
+            <svg class="w-6 h-6 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path></svg>
+        </button>
+        <button id="next-quote" class="p-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition-colors group" aria-label="Siguiente frase">
+            <svg class="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script define:vars={{ quotes }}>
+  let currentIndex = 0;
+  const quoteText = document.getElementById('quote-text');
+  const quoteCounter = document.getElementById('quote-counter');
+  const prevBtn = document.getElementById('prev-quote');
+  const nextBtn = document.getElementById('next-quote');
+  const container = document.getElementById('quote-container');
+
+  function updateQuote(index) {
+    // Fade out
+    container.style.opacity = '0';
+    
+    setTimeout(() => {
+        quoteText.textContent = quotes[index].text;
+        quoteCounter.textContent = `${index + 1} / ${quotes.length}`;
+        
+        // Fade in
+        container.style.opacity = '1';
+    }, 300);
+  }
+
+  prevBtn?.addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+    updateQuote(currentIndex);
+  });
+
+  nextBtn?.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % quotes.length;
+    updateQuote(currentIndex);
+  });
+</script>

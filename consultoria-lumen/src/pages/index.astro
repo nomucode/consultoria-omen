@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import AboutSection from '../components/AboutSection.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import HealingQuotes from '../components/HealingQuotes.astro';
 import { getCollection } from 'astro:content';
 
 const services = await getCollection('services');
@@ -30,4 +31,6 @@ const services = await getCollection('services');
 			</div>
 		</div>
 	</section>
+
+	<HealingQuotes />
 </Layout>
