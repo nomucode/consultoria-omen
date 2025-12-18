@@ -7,7 +7,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://luisaplanas.github.io',
   base: '/consultoria-quintaesencia',
-  outDir: 'docs',
+  outDir: '../docs',
   vite: {
     plugins: [tailwindcss()]
   }
