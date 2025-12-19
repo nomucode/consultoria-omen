@@ -1,0 +1,38 @@
+---
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://consultoria-quintaesencia.com/#organization",
+      "name": "Consultoria Quintaesencia",
+      "image": "https://consultoria-quintaesencia.com/og-image.jpg",
+      "url": "https://consultoria-quintaesencia.com",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ES"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Luisa Planas"
+      },
+      "sameAs": [
+        "https://instagram.com/luisaplanas",
+        "https://twitter.com/luisaplanas"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://consultoria-quintaesencia.com/#person",
+      "name": "Luisa Planas",
+      "jobTitle": "Consultora Astrológica y Tarotista",
+      "url": "https://consultoria-quintaesencia.com",
+      "image": "https://consultoria-quintaesencia.com/Retrato.jpeg",
+      "description": "Experta en Astrología Evolutiva y Tarot Terapéutico."
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

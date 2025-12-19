@@ -9,6 +9,14 @@ interface Props {
 const { service } = Astro.props;
 const { title, price, duration, description, icon, calendlyEventUrl } = service.data;
 
+// Get Calendly URL from env vars or fallback to frontmatter
+const envUrlMap: Record<string, string | undefined> = {
+  'carta-astral': import.meta.env.PUBLIC_CALENDLY_CARTA_ASTRAL,
+  'tarot': import.meta.env.PUBLIC_CALENDLY_TAROT,
+};
+
+const finalCalendlyUrl = envUrlMap[service.id] || calendlyEventUrl;
+
 // Map icons to SVGs
 const iconMap = {
   star: `<svg class="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"></path></svg>`,
@@ -49,7 +57,7 @@ const svgIcon = iconMap[icon as keyof typeof iconMap] || iconMap.default;
     </p>
     
     <div class="mt-auto pt-6 border-t border-white/5">
-      <CalendlyWidget url={calendlyEventUrl} text="Reservar Sesión" />
+      <CalendlyWidget url={finalCalendlyUrl} text="Reservar Sesión" />
     </div>
   </div>
 </div>

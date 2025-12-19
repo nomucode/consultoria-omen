@@ -1,30 +1,33 @@
 ---
+import SEO from '../components/SEO.astro';
+import JsonLd from '../components/JsonLd.astro';
 import '../styles/global.css';
 
 interface Props {
 	title: string;
-    description?: string;
+	description?: string;
+	image?: string;
+	noindex?: boolean;
 }
 
-const { title, description = "Consultoría Espiritual y Astrológica con Luisa Planas." } = Astro.props;
+const { 
+	title, 
+	description = "Consultoría Espiritual y Astrológica con Luisa Planas.",
+	image,
+	noindex
+} = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es" class="scroll-smooth">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-        
-        <!-- Open Graph / Facebook -->
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={Astro.url} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        
-		<title>{title}</title>
+		<SEO 
+			title={title} 
+			description={description} 
+			image={image} 
+			noindex={noindex} 
+		/>
+		<JsonLd />
 	</head>
 	<body class="bg-background text-text min-h-screen flex flex-col selection:bg-accent selection:text-background overflow-x-hidden relative">
         <!-- Noise Texture Overlay -->
